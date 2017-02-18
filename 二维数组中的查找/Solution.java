@@ -12,7 +12,7 @@ public class Solution{
 	public boolean Find(int target, int [][] array){
 		int row = 0;//行号
 		int col = array[0].length - 1;//列号
-		while(row <= array.length && col >= 0){
+		while(row <= array.length - 1 && col >= 0){
 			if(target < array[row][col]){
 				col --;
 			}else if(target > array[row][col]){
