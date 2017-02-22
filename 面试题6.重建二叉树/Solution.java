@@ -33,3 +33,25 @@ public class Solution {
 		return node;
 	}
 }
+
+//不用copyOfRange方法，重载reConstructBinaryTree方法，使用下标在原数组上操作，防止生成过多数组
+public class Solution {
+	public TreeNode reConstructBinaryTree(int [] pre, int [] in){
+		TreeNode root = reConstructBinaryTree(pre, 0, pre.length, in, 0, in.length);
+		return root;
+	}
+	public TreeNode reConstructBinaryTree(int [] pre, int startPre, int endPre, int [] in, int startIn, int endIn){
+		if(startPre > endPre || startIn > endIn){
+			return null;
+		}
+		TreeNode node = new TreeNode(pre[startPre]);
+		for (int i = startIn; i < endIn; i ++) {
+			if(in[i] = node.val){
+	            root.left=reConstructBinaryTree(pre,startPre+1,startPre+i-startIn,in,startIn,i-1);
+                root.right=reConstructBinaryTree(pre,i-startIn+startPre+1,endPre,in,i+1,endIn);
+			}
+		}
+		return node;
+	}
+
+}

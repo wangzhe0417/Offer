@@ -27,10 +27,10 @@ public class Solution {
 		int fn1 = 1;
 		int fn2 = 1;
 		while(n-- > 2){
-			fn1 += fn2;
-			fn2 = fn1 - fn2;
+			fn2 = fn1 + fn2;
+			fn1 = fn2 - fn1;
 		}
-		return fn1;
+		return fn2;
 	}
 }
 
