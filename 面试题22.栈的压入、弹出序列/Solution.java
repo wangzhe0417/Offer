@@ -4,13 +4,28 @@
  * 		是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：
  *		这两个序列的长度是相等的）
  *
- * 思路：
+ * 思路：借助一个辅助栈，将入栈序列依次入栈，栈顶元素与所给出的出栈队列相比，如果相同则出栈，
+ *		如果不同，则继续入栈，直到原入栈序列全部入栈为止；检测辅助栈是否为空，若空，说明出栈
+ *		队列正确，否则不正确。
  */
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Solution {
     public boolean IsPopOrder(int [] pushA,int [] popA) {
-      
+    	if (pushA.length == 0 || popA.length == 0) {
+    		return false;
+    	}
+    	Stack<Integer> stack = new Stack<>();
+    	int popIndex = 0;
+    	for (int i = 0; i < pushA.length; i++) {
+    		stack.push(pushA[i]);
+    		while(!stack.empty() && stack.peek() == popA[popIndex]) {
+    			stack.pop();
+    			popIndex ++;
+    		}
+    	}
+    	return stack.empty();
     }
 }
