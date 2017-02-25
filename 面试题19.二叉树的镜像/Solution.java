@@ -18,20 +18,20 @@ public class TreeNode {
 
 }
 */
-//递归实现
+
 public class Solution {
     public void Mirror(TreeNode root) {
         if (root == null) 
-        	return ;
+            return ;
         if (root.left == null && root.right == null) 
-        	return ;
+            return ;
         TreeNode temp = root.left;
         root.left = root.right;
-        root.right = root.left;
+        root.right = temp;
 
         if(root.left != null)
-        	return Mirror(root.left);
+            Mirror(root.left);
         if (root.right != null)
-        	return Mirror(root.right);
+            Mirror(root.right);
     }
 }
