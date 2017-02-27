@@ -51,6 +51,8 @@ public class Solution {
 }
 
 //非递归实现
+import java.util.Stack;
+
 public class Solution {
     public TreeNode Convert(TreeNode pRootOfTree) {
         if (pRootOfTree == null)
@@ -58,16 +60,24 @@ public class Solution {
 		Stack<TreeNode> stack = new Stack<>();
 		TreeNode pNode = pRootOfTree;
 		TreeNode preNode = null;
+		boolean isFirst = true;
 		while(pNode != null || !stack.empty()){
 			while (pNode != null) {
-			stack.push(pNode);
-			pNode = pNode.left;
+				stack.push(pNode);
+				pNode = pNode.left;
 			 }
-		pNode = stack.pop();
-		if (pNode.right != null) {
-			
+			pNode = stack.pop();
+			if (isFirst) {
+				pRootOfTree = pNode;
+				preNode = pRootOfTree;
+				isFirst = false;
+			} else {
+				preNode.right = pNode;
+				pNode.left = preNode;
+				preNode = pNode;
+			}
+			pNode = pNode.right;
 		}
-		
-		}
+		return pRootOfTree;
     }
 }
