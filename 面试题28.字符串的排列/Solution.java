@@ -39,7 +39,7 @@ public class Solution {
        ArrayList<String> result = new ArrayList<>();
        if(str == null || str.length == 0)
        	return result;
-       HashSet<String> set = new HashSet<String>();
+       HashSet<String> set = new HashSet<String>();//使用HashSet不需要考虑去重
        fun(set, str.toCharArray(), 0);
        result.addAll(set);
        Collections.sort(result);
@@ -95,26 +95,31 @@ public class Solution {
 //迭代实现
 public ArrayList<String> Permutation2(String str){
         ArrayList<String> list = new ArrayList<String>();
+
         if(str==null || str.length()==0){
             return list;
         }
         char[] chars = str.toCharArray();
-        Arrays.sort(chars);
+        Arrays.sort(chars);//排列
         list.add(String.valueOf(chars));
+
         int len = chars.length;
         while(true){
             int lIndex = len-1;
             int rIndex;
+            //从后向前找一个chars[lIndex-1] < chars[rIndex]
             while(lIndex>=1 && chars[lIndex-1]>=chars[lIndex]){
                 lIndex--;
             }
-            if(lIndex == 0)
+            if(lIndex == 0)//未找到，则已经是最小的排列，退出
                 break;
             rIndex = lIndex;
+            //从lIndex向后找最后一个比chars[rIndex]大的数
             while(rIndex<len && chars[rIndex]>chars[lIndex-1]){
                 rIndex++;
             }
             swap(chars,lIndex-1,rIndex-1);
+            //将lIndex之后的序列倒序排列
             reverse(chars,lIndex);
  
             list.add(String.valueOf(chars));
@@ -134,5 +139,12 @@ public ArrayList<String> Permutation2(String str){
                 swap(chars,m,n);
             }
         }
- 
     }
+    public void swap(cha[] chars, int i, int j) {
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
+}
+
+
