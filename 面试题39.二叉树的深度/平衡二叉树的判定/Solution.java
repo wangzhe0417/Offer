@@ -14,6 +14,7 @@ public class Solution {
         return IsBalanced_Solution(root.left) && IsBalanced_Solution(root.right);
        	
     }
+    //每次计算当前节点的高度
     public int TreeDepth(TreeNode root) {
         if (root == null)
         	return 0;
